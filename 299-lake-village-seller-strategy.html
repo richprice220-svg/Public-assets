@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>299 Lake Village Dr — Seller Strategy Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #2f2f2f; --ink-soft: #555; --green: #26601a; --green-light: #3a8226;
+  --green-pale: #eef4eb; --cream: #f8f6f3; --cream-dark: #f0ede7;
+  --line: #e0dbd3; --line-strong: #ccc7bc; --mute: #888; --chip: #ede9e3;
+  --alert-bg: #fdf6ec; --alert-border: #d4a340; --white: #ffffff;
+}
+html, body { background: #e8e5de; color: var(--ink); font-family: 'Inter', -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+.shell { max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; }
+
+/* LOGIN */
+#login-screen { position: fixed; inset: 0; background: #e8e5de; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.login-card { background: var(--white); border-radius: 16px; padding: 40px 44px; width: 100%; max-width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,.15); text-align: center; }
+.login-card h2 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+.login-card .login-sub { font-size: 13px; color: var(--mute); margin-bottom: 28px; }
+.login-field { display: flex; flex-direction: column; gap: 6px; text-align: left; margin-bottom: 14px; }
+.login-field label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); }
+.login-field input { padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 14px; font-family: inherit; color: var(--ink); background: var(--cream); transition: border-color .15s; }
+.login-field input:focus { outline: none; border-color: var(--green); background: var(--white); }
+.login-btn { width: 100%; padding: 12px; background: var(--green); color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; margin-top: 6px; transition: background .15s; }
+.login-btn:hover { background: var(--green-light); }
+.login-error { font-size: 12px; color: #b03030; margin-top: 10px; display: none; }
+.login-logo { margin-bottom: 20px; }
+.login-logo img { height: 36px; }
+
+/* HEADER */
+.header { background: var(--ink); border-radius: 14px 14px 0 0; padding: 36px 40px 32px; position: relative; overflow: hidden; }
+.header::after { content: ''; position: absolute; right: -40px; top: -40px; width: 220px; height: 220px; border: 1px solid rgba(255,255,255,.07); border-radius: 50%; }
+.header::before { content: ''; position: absolute; right: 20px; top: 20px; width: 140px; height: 140px; border: 1px solid rgba(255,255,255,.05); border-radius: 50%; }
+.header-inner { display: flex; align-items: flex-start; gap: 24px; position: relative; z-index: 2; }
+.agent-photo { width: 64px; height: 64px; border-radius: 50%; border: 2px solid rgba(255,255,255,.2); object-fit: cover; flex: none; background: #444; }
+.header-text { flex: 1; }
+.eyebrow { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.45); font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 600; color: #fff; line-height: 1.1; letter-spacing: -.01em; }
+.header .sub { font-size: 13px; color: rgba(255,255,255,.5); margin-top: 5px; }
+.header-logo img { height: 38px; opacity: .85; }
+
+/* HERO STATS — FIXED SPACING */
+.hero-stats { background: var(--green); padding: 0 40px; display: flex; flex-wrap: wrap; }
+.hstat { flex: 1; min-width: 140px; padding: 20px 24px 20px 0; border-right: 1px solid rgba(255,255,255,.15); }
+.hstat:first-child { padding-left: 0; }
+.hstat:last-child { border-right: none; padding-right: 0; }
+.hstat .k { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.6); font-weight: 600; display: block; margin-bottom: 4px; }
+.hstat .v { font-size: 22px; font-weight: 700; color: #fff; display: block; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.hstat .v small { font-size: 13px; font-weight: 400; color: rgba(255,255,255,.65); }
+
+/* TABS */
+.tab-bar { background: var(--cream-dark); border-bottom: 1px solid var(--line); display: flex; overflow-x: auto; padding: 0 40px; }
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab { flex: none; padding: 14px 18px; font-size: 13px; font-weight: 600; color: var(--mute); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; user-select: none; }
+.tab:hover { color: var(--ink); }
+.tab.active { color: var(--green); border-bottom-color: var(--green); }
+
+/* BODY */
+.body { background: var(--cream); padding: 36px 40px 40px; border-radius: 0 0 14px 14px; }
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* EDIT MODE CHROME */
+.edit-bar { background: var(--ink); padding: 10px 40px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.edit-bar .edit-label { font-size: 11px; color: rgba(255,255,255,.5); letter-spacing: .06em; }
+.edit-bar .user-tag { font-size: 12px; color: rgba(255,255,255,.7); font-weight: 600; }
+.edit-bar-right { display: flex; gap: 8px; align-items: center; }
+.btn { padding: 7px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer; border: none; transition: background .15s; }
+.btn-ghost { background: rgba(255,255,255,.1); color: rgba(255,255,255,.8); }
+.btn-ghost:hover { background: rgba(255,255,255,.2); }
+.btn-green { background: var(--green); color: #fff; }
+.btn-green:hover { background: var(--green-light); }
+.btn-danger { background: rgba(180,50,50,.15); color: #c44; }
+.btn-danger:hover { background: rgba(180,50,50,.25); }
+.edit-mode-on [data-editable] { outline: 1.5px dashed rgba(38,96,26,.35); border-radius: 3px; cursor: text; transition: outline .1s; }
+.edit-mode-on [data-editable]:hover { outline: 2px solid var(--green); background: rgba(38,96,26,.04); }
+.edit-mode-on [data-editable]:focus { outline: 2px solid var(--green); background: var(--white); }
+.save-status { font-size: 11px; color: rgba(255,255,255,.5); }
+
+/* SECTION HEADS */
+.sec-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.sec-head h2 { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600; letter-spacing: -.01em; color: var(--ink); }
+.sec-note { font-size: 11px; color: var(--mute); margin-left: auto; }
+.lead { font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 18px; }
+.lead b { color: var(--ink); }
+.divider { height: 1px; background: var(--line); margin: 28px 0; }
+
+/* SNAPSHOT */
+.snapshot { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; margin-bottom: 20px; }
+.snap-cell { background: var(--white); padding: 13px 14px; }
+.snap-cell .k { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); }
+.snap-cell .v { font-size: 16px; font-weight: 700; margin-top: 3px; color: var(--ink); }
+
+/* CALLOUT */
+.callout { background: var(--alert-bg); border: 1px solid var(--alert-border); border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin: 14px 0; }
+.callout b { color: var(--ink); }
+.callout.green { background: var(--green-pale); border-color: var(--green-light); }
+
+/* TABLES */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { text-align: right; font-size: 10px; letter-spacing: .05em; text-transform: uppercase; color: var(--mute); font-weight: 600; padding: 8px 8px; border-bottom: 1.5px solid var(--line-strong); }
+thead th:first-child { text-align: left; }
+tbody td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: top; color: var(--ink); }
+tbody td:first-child { text-align: left; font-weight: 600; }
+tbody td .meta { display: block; font-size: 11px; font-weight: 400; color: var(--mute); margin-top: 2px; }
+tr.highlight td { background: rgba(38,96,26,.07); }
+tr.highlight td:first-child { box-shadow: inset 3px 0 0 var(--green); }
+tr.outlier td { background: #fafafa; color: var(--mute) !important; }
+tr.outlier td:first-child { box-shadow: inset 3px 0 0 var(--line-strong); color: var(--mute); }
+tr.sumrow td { background: var(--cream-dark); font-weight: 700; border-top: 1.5px solid var(--line-strong); border-bottom: none; }
+.tier-label { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--mute); margin: 20px 0 8px; display: flex; align-items: center; gap: 10px; }
+.tier-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+.tag { display: inline-block; font-size: 9px; letter-spacing: .05em; text-transform: uppercase; font-weight: 700; padding: 2px 7px; border-radius: 20px; vertical-align: middle; margin-left: 6px; }
+.tag.match { background: var(--green); color: #fff; }
+.tag.caution { background: #d4a340; color: #fff; }
+
+/* DOT PLOT */
+.dotplot { border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px 16px; background: var(--white); }
+.dp-row { display: grid; grid-template-columns: 170px 1fr 60px; align-items: center; gap: 14px; padding: 4px 6px; border-radius: 6px; }
+.dp-name { font-size: 12px; font-weight: 600; line-height: 1.2; color: var(--ink); }
+.dp-name small { display: block; font-weight: 400; font-size: 10px; color: var(--mute); margin-top: 1px; }
+.dp-track { position: relative; height: 16px; }
+.dp-track::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--line); transform: translateY(-50%); border-radius: 2px; }
+.dp-dot { position: absolute; top: 50%; width: 11px; height: 11px; border-radius: 50%; background: var(--mute); border: 2px solid #fff; box-shadow: 0 0 0 1.5px var(--mute); transform: translate(-50%,-50%); }
+.dp-val { font-size: 12px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+.dp-row.green-row .dp-dot { background: var(--green); box-shadow: 0 0 0 1.5px var(--green); width: 13px; height: 13px; }
+.dp-row.green-row .dp-val { color: var(--green); }
+.dp-row.avg-row { background: var(--cream-dark); }
+.dp-row.avg-row .dp-dot { background: var(--white); border: 2px solid var(--ink-soft); box-shadow: 0 0 0 1.5px var(--ink-soft); width: 12px; height: 12px; border-radius: 2px; transform: translate(-50%,-50%) rotate(45deg); }
+.dp-row.dim .dp-dot { background: var(--line-strong); box-shadow: 0 0 0 1.5px var(--line-strong); }
+.dp-row.dim .dp-val { color: var(--line-strong); }
+.dp-axis { display: grid; grid-template-columns: 170px 1fr 60px; gap: 14px; margin-top: 6px; }
+.dp-axisline { position: relative; height: 16px; border-top: 1px solid var(--line); }
+.dp-axisline span { position: absolute; top: 4px; font-size: 10px; color: var(--mute); transform: translateX(-50%); }
+
+/* PRICE BOX */
+.price-box { border: 1.5px solid var(--green); border-radius: 12px; overflow: hidden; background: var(--white); margin-bottom: 20px; }
+.price-top { background: var(--green); color: #fff; padding: 20px 26px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.price-top .big { font-family: 'Fraunces', serif; font-size: 38px; font-weight: 600; line-height: 1; }
+.price-top .lab { font-size: 10px; letter-spacing: .13em; text-transform: uppercase; color: rgba(255,255,255,.65); }
+.price-top .range { font-size: 12px; color: rgba(255,255,255,.7); margin-top: 3px; }
+.price-top .right { margin-left: auto; text-align: right; }
+.price-top .right .d { font-size: 19px; font-weight: 700; }
+.price-body { padding: 20px 26px; }
+.rationale { list-style: none; display: grid; gap: 12px; }
+.rationale li { display: flex; gap: 12px; font-size: 13.5px; line-height: 1.5; }
+.rationale .icn { color: var(--green); font-weight: 700; flex: none; font-family: 'Fraunces', serif; font-size: 15px; }
+
+/* NET SHEET */
+.net-grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; align-items: start; }
+.net-table { width: 100%; font-size: 13.5px; border-collapse: collapse; }
+.net-table td { padding: 9px 4px; border-bottom: 1px solid var(--line); }
+.net-table td:first-child { color: var(--ink-soft); }
+.net-table td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.net-table tr.tot td { border-top: 1.5px solid var(--ink); border-bottom: none; font-weight: 700; font-size: 15px; padding-top: 12px; color: var(--ink); }
+.net-note { background: var(--chip); border-radius: 10px; padding: 16px 18px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; }
+.net-note b { color: var(--ink); }
+.net-input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.net-input-row label { font-size: 12px; color: var(--ink-soft); flex: 1; }
+.net-input-row input { width: 130px; padding: 6px 10px; border: 1px solid var(--line-strong); border-radius: 6px; font-size: 13px; font-family: inherit; color: var(--ink); background: var(--white); text-align: right; }
+.net-input-row input:focus { outline: none; border-color: var(--green); }
+
+/* STRATEGY CARDS */
+.plays { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.play { border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; background: var(--white); }
+.play .n { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--green); }
+.play h3 { font-size: 14px; font-weight: 700; margin: 5px 0 6px; letter-spacing: -.01em; }
+.play p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+.play.lead-play { grid-column: 1 / -1; border-color: var(--green); background: linear-gradient(160deg, var(--green-pale), var(--white)); }
+
+/* TIMELINE */
+.timeline { display: grid; gap: 0; }
+.tl-item { display: grid; grid-template-columns: 80px 1fr; gap: 16px; }
+.tl-left { display: flex; flex-direction: column; align-items: center; }
+.tl-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--green); flex: none; margin-top: 3px; }
+.tl-line { flex: 1; width: 2px; background: var(--line); margin: 4px 0; min-height: 16px; }
+.tl-item:last-child .tl-line { display: none; }
+.tl-week { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--green); text-align: center; }
+.tl-content { padding-bottom: 20px; }
+.tl-content h4 { font-size: 13.5px; font-weight: 700; margin-bottom: 4px; }
+.tl-content p { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+
+/* NOTES TAB */
+.notes-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.notes-intro { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 20px; }
+.note-card { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+.note-card .note-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.note-card .note-author { font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: .04em; }
+.note-card .note-date { font-size: 11px; color: var(--mute); }
+.note-card .note-body { font-size: 13.5px; color: var(--ink); line-height: 1.6; }
+.note-delete { background: none; border: none; color: var(--mute); font-size: 16px; cursor: pointer; padding: 0 2px; line-height: 1; }
+.note-delete:hover { color: #b03030; }
+.add-note-box { background: var(--white); border: 1.5px dashed var(--line-strong); border-radius: 10px; padding: 16px 18px; margin-top: 8px; }
+.add-note-box textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; font-size: 13.5px; font-family: inherit; color: var(--ink); resize: vertical; min-height: 80px; background: var(--cream); }
+.add-note-box textarea:focus { outline: none; border-color: var(--green); background: var(--white); }
+.add-note-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.add-note-footer span { font-size: 11px; color: var(--mute); }
+.empty-notes { text-align: center; padding: 32px 20px; color: var(--mute); font-size: 13px; }
+
+/* FOOTER */
+.footer { background: var(--ink); border-radius: 0 0 14px 14px; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-contact { display: flex; align-items: center; gap: 16px; }
+.footer-contact a { color: rgba(255,255,255,.6); font-size: 12px; text-decoration: none; }
+.footer-contact a:hover { color: #fff; }
+.footer-disc { font-size: 11px; color: rgba(255,255,255,.3); }
+
+/* TOAST */
+.toast { position: fixed; bottom: 24px; right: 24px; background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; box-shadow: 0 8px 24px rgba(0,0,0,.25); opacity: 0; transform: translateY(8px); transition: all .2s; z-index: 999; pointer-events: none; }
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.green { background: var(--green); }
+.toast.red { background: #b03030; }
+
+@media (max-width: 640px) {
+  .header, .body, .edit-bar { padding-left: 22px; padding-right: 22px; }
+  .hero-stats { padding: 0 22px; }
+  .tab-bar, .footer { padding-left: 22px; padding-right: 22px; }
+  .snapshot { grid-template-columns: repeat(3, 1fr); }
+  .plays { grid-template-columns: 1fr; }
+  .net-grid { grid-template-columns: 1fr; }
+  .dp-row, .dp-axis { grid-template-columns: 120px 1fr 52px; gap: 10px; }
+  .dp-name { font-size: 11px; }
+  .price-top { flex-direction: column; gap: 10px; }
+  .price-top .right { margin-left: 0; text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="https://cdn.jsdelivr.net/gh/richprice220-svg/Public-assets/rich-logo.svg" alt="Rich Price" onerror="this.style.display='none'">
+    </div>
+    <h2>299 Lake Village Dr.</h2>
+    <div class="login-sub">Seller Strategy Brief — Private Access</div>
+    <div class="login-field">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="your@email.com" autocomplete="email">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-error" id="login-error">Email or password not recognized.</div>
+  </div>
+</div>
+
+<!-- EDIT BAR -->
+<div class="edit-bar" id="edit-bar" style="display:none;">
+  <div>
+    <span class="edit-label">Logged in as </span>
+    <span class="user-tag" id="user-display"></span>
+  </div>
+  <div class="edit-bar-right">
+    <span class="save-status" id="save-status"></span>
+    <button class="btn btn-ghost" id="edit-toggle-btn" onclick="toggleEditMode()">✏️ Edit</button>
+    <button class="btn btn-green" id="save-btn" onclick="saveToGitHub()" style="display:none;">Save Changes</button>
+    <button class="btn btn-danger" onclick="doLogout()">Sign out</button>
+  </div>
+</div>
+
+<div class="shell" id="app" style="display:none;">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-inner">
+      <img class="agent-photo"
+        src="https://cdn.jsdelivr.net/gh/richprice220-svg/Public-assets/rich-headshot.jpg"
+        alt="Rich Price" onerror="this.style.display='none'">
+      <div class="header-text">
+        <div class="eyebrow">Seller Strategy Brief &middot; Prepared by Rich Price, Keller Williams Realty</div>
+        <h1>299 Lake Village Drive</h1>
+        <div class="sub">Reunion &middot; Madison, MS 39110 &middot; 5 Bed / 3.5 Bath &middot; 3,442 sq ft &middot; Built 2005</div>
+      </div>
+      <div class="header-logo">
+        <img src="https://cdn.jsdelivr.net/gh/richprice220-svg/Public-assets/rich-logo.svg"
+          alt="Rich Price" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO STATS -->
+  <div class="hero-stats">
+    <div class="hstat">
+      <span class="k">Recommended List</span>
+      <span class="v" data-editable="hero.listPrice" data-key="hero.listPrice"></span>
+    </div>
+    <div class="hstat">
+      <span class="k">Price Range</span>
+      <span class="v" data-editable="hero.priceRange" data-key="hero.priceRange"></span>
+    </div>
+    <div class="hstat">
+      <span class="k">Price / Sq Ft</span>
+      <span class="v" data-editable="hero.pricePerSqft" data-key="hero.pricePerSqft"></span>
+    </div>
+    <div class="hstat">
+      <span class="k">Target Launch</span>
+      <span class="v" data-editable="hero.targetLaunch" data-key="hero.targetLaunch"></span>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <div class="tab active" onclick="switchTab(0)">Overview</div>
+    <div class="tab" onclick="switchTab(1)">Comps</div>
+    <div class="tab" onclick="switchTab(2)">Pricing</div>
+    <div class="tab" onclick="switchTab(3)">Net Sheet</div>
+    <div class="tab" onclick="switchTab(4)">Game Plan</div>
+    <div class="tab" onclick="switchTab(5)">Notes</div>
+  </div>
+
+  <div class="body">
+
+    <!-- TAB 0: OVERVIEW -->
+    <div class="panel active" id="tab-0">
+      <div class="sec-head"><h2>Your home</h2><span class="sec-note">As listed for analysis</span></div>
+      <div class="snapshot">
+        <div class="snap-cell"><div class="k">Living Area</div><div class="v">3,442 sf</div></div>
+        <div class="snap-cell"><div class="k">Year Built</div><div class="v">2005</div></div>
+        <div class="snap-cell"><div class="k">Beds / Baths</div><div class="v">5 / 3.5</div></div>
+        <div class="snap-cell"><div class="k">Lot</div><div class="v">~0.40 ac</div></div>
+        <div class="snap-cell"><div class="k">Garage</div><div class="v">3-car</div></div>
+        <div class="snap-cell"><div class="k">Subdivision</div><div class="v">Reunion</div></div>
+      </div>
+      <p class="lead" data-editable="overview.lead" data-key="overview.lead"></p>
+      <div class="callout green">
+        <b>The core finding:</b> <span data-editable="overview.coreFinding" data-key="overview.coreFinding"></span>
+      </div>
+      <div class="divider"></div>
+      <div class="sec-head"><h2>What the market is telling us</h2></div>
+      <div class="plays" id="overview-cards"></div>
+    </div>
+
+    <!-- TAB 1: COMPS (static — data doesn't change per listing) -->
+    <div class="panel" id="tab-1">
+      <div class="sec-head"><h2>Comparable sales</h2><span class="sec-note">Reunion &middot; 3,000+ sq ft</span></div>
+      <p class="lead">These are the homes that sold in your size range in Reunion. The ones most useful for pricing are the clean, move-in ready sales with short days on market. Outliers — distressed, as-is, or severely overpriced before finding their level — are noted but not used to anchor the recommendation.</p>
+      <div class="tier-label">Core comps &mdash; clean market signals</div>
+      <table>
+        <thead><tr><th>Address</th><th>Bd/Ba</th><th>Sq Ft</th><th>Yr</th><th>Sold</th><th>$/sf</th><th>DOM</th><th>Concessions</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td>106 Fenwick Circle <span class="tag match">5-bed</span><span class="meta">Move-in ready, 2-day sale</span></td><td>5/4.5</td><td>3,910</td><td>2009</td><td>$819,294</td><td>$210</td><td>2</td><td>$2,500</td></tr>
+          <tr class="highlight"><td>107 Cedar Woods Dr <span class="tag match">5-bed</span><span class="meta">Largest in set, 41-day sale</span></td><td>5/4.5</td><td>4,181</td><td>2011</td><td>$850,000</td><td>$203</td><td>41</td><td>$2,000</td></tr>
+          <tr><td>125 Vinca Drive<span class="meta">4/4, similar sqft — 112 days, no concessions</span></td><td>4/4</td><td>3,424</td><td>2012</td><td>$725,000</td><td>$212</td><td>112</td><td>$0</td></tr>
+          <tr><td>107 Vinca Drive<span class="meta">4/3, 5-day sale, move-in ready</span></td><td>4/3</td><td>3,367</td><td>2006</td><td>$719,000</td><td>$214</td><td>5</td><td>$1,000</td></tr>
+          <tr><td>121 Covington Way<span class="meta">Newer build, 9-day sale</span></td><td>4/4.5</td><td>3,919</td><td>2016</td><td>$784,000</td><td>$200</td><td>9</td><td>$250</td></tr>
+          <tr><td>101 Shoreline Drive<span class="meta">4/4, pool, 6-day sale</span></td><td>4/4</td><td>3,492</td><td>2009</td><td>$696,250</td><td>$199</td><td>6</td><td>$6,800</td></tr>
+          <tr><td>107 Northlake Lane<span class="meta">4/3.5, 9-day sale</span></td><td>4/3.5</td><td>3,255</td><td>2008</td><td>$610,000</td><td>$187</td><td>9</td><td>$2,500</td></tr>
+          <tr class="sumrow"><td>Core comp average</td><td colspan="3"></td><td>$743,000</td><td>$204</td><td>27</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div class="tier-label">Outliers &mdash; not used to anchor price</div>
+      <table>
+        <thead><tr><th>Address</th><th>Bd/Ba</th><th>Sq Ft</th><th>Sold</th><th>$/sf</th><th>DOM</th><th>Why excluded</th></tr></thead>
+        <tbody>
+          <tr class="outlier"><td>281 Lake Village Dr<span class="meta">Same street, same floor plan</span></td><td>4/3.5</td><td>3,577</td><td>$535,000</td><td>$150</td><td>36</td><td style="text-align:right;font-size:11.5px;">As-is sale, deferred maintenance priced in</td></tr>
+          <tr class="outlier"><td>101 Lake Village Dr</td><td>4/3.5</td><td>3,770</td><td>$727,000</td><td>$193</td><td>363</td><td style="text-align:right;font-size:11.5px;">363 DOM — badly overpriced, then found level</td></tr>
+          <tr class="outlier"><td>121 Vinca Drive</td><td>4/3.5</td><td>3,188</td><td>$505,000</td><td>$158</td><td>158</td><td style="text-align:right;font-size:11.5px;">88.8% of list — condition/motivation issue</td></tr>
+        </tbody>
+      </table>
+      <div class="callout" style="margin-top:18px;">
+        <b>The outlier on your street:</b> 281 Lake Village Dr. (same lot block, similar floor plan) sold as-is at $535,000 after 36 days. That's not a market signal for your home — it's what happens when a home is sold with known deferred maintenance priced in. It sets a floor, not a ceiling. A clean, updated home on the same street commands a 30%+ premium.
+      </div>
+      <div class="divider"></div>
+      <div class="sec-head"><h2>Active competition</h2><span class="sec-note">What buyers will compare you to</span></div>
+      <table>
+        <thead><tr><th>Address</th><th>Status</th><th>Bd/Ba</th><th>Sq Ft</th><th>Yr</th><th>List Price</th><th>$/sf</th><th>DOM</th></tr></thead>
+        <tbody>
+          <tr class="highlight"><td>135 Carrick Ave <span class="tag match">Direct twin</span><span class="meta">5/4.5, 2005 build — just listed</span></td><td>Active</td><td>5/4.5</td><td>3,400</td><td>2005</td><td>$725,000</td><td>$213</td><td>1</td></tr>
+          <tr><td>148 Cedar Woods Cove<span class="meta">5/4.5, largest in set</span></td><td>Active</td><td>5/4.5</td><td>4,442</td><td>2004</td><td>$849,000</td><td>$191</td><td>78</td></tr>
+          <tr><td>110 Bristol Lane<span class="meta">4/4.5, 2013 build</span></td><td>Active</td><td>4/4.5</td><td>3,390</td><td>2013</td><td>$699,000</td><td>$206</td><td>22</td></tr>
+          <tr><td>124 Lake Village Dr<span class="meta">Pending after 11 days</span></td><td>Pending</td><td>4/4.5</td><td>3,050</td><td>2010</td><td>$665,000</td><td>$218</td><td>11</td></tr>
+          <tr><td>104 Ivy Brook Drive<span class="meta">Pending after 97 days</span></td><td>Pending</td><td>5/4</td><td>3,686</td><td>2010</td><td>$675,000</td><td>$183</td><td>97</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 2: PRICING -->
+    <div class="panel" id="tab-2">
+      <div class="sec-head"><h2>Where your home fits</h2></div>
+      <p class="lead">Price per square foot among comparable Reunion sold homes. Your recommended list price lands in the middle of the clean comp cluster.</p>
+      <div class="dotplot">
+        <div class="dp-row dim"><div class="dp-name">281 Lake Village<small>as-is outlier</small></div><div class="dp-track"><span class="dp-dot" style="left:2%"></span></div><div class="dp-val">$150</div></div>
+        <div class="dp-row dim"><div class="dp-name">121 Vinca<small>distressed outlier</small></div><div class="dp-track"><span class="dp-dot" style="left:18%"></span></div><div class="dp-val">$158</div></div>
+        <div class="dp-row"><div class="dp-name">107 Northlake Ln<small>4/3.5, 2008</small></div><div class="dp-track"><span class="dp-dot" style="left:32%"></span></div><div class="dp-val">$187</div></div>
+        <div class="dp-row"><div class="dp-name">114 Bristol Dr<small>5/6, 2011</small></div><div class="dp-track"><span class="dp-dot" style="left:35%"></span></div><div class="dp-val">$189</div></div>
+        <div class="dp-row"><div class="dp-name">101 Shoreline Dr<small>4/4, pool, 2009</small></div><div class="dp-track"><span class="dp-dot" style="left:44%"></span></div><div class="dp-val">$199</div></div>
+        <div class="dp-row"><div class="dp-name">121 Covington Way<small>4/4.5, 2016</small></div><div class="dp-track"><span class="dp-dot" style="left:47%"></span></div><div class="dp-val">$200</div></div>
+        <div class="dp-row"><div class="dp-name">107 Cedar Woods<small>5/4.5, 2011</small></div><div class="dp-track"><span class="dp-dot" style="left:51%"></span></div><div class="dp-val">$203</div></div>
+        <div class="dp-row avg-row"><div class="dp-name">Peer average<small>clean comps</small></div><div class="dp-track"><span class="dp-dot" style="left:54%"></span></div><div class="dp-val">$204</div></div>
+        <div class="dp-row green-row"><div class="dp-name">Recommended<small id="dp-rec-label">$710,000</small></div><div class="dp-track"><span class="dp-dot" style="left:56%"></span></div><div class="dp-val">$206</div></div>
+        <div class="dp-row"><div class="dp-name">106 Fenwick Circle<small>5/4.5, 2-day sale</small></div><div class="dp-track"><span class="dp-dot" style="left:58%"></span></div><div class="dp-val">$210</div></div>
+        <div class="dp-row"><div class="dp-name">125 Vinca Dr<small>4/4, 112 DOM</small></div><div class="dp-track"><span class="dp-dot" style="left:62%"></span></div><div class="dp-val">$212</div></div>
+        <div class="dp-row"><div class="dp-name">107 Vinca Dr<small>5-day sale</small></div><div class="dp-track"><span class="dp-dot" style="left:65%"></span></div><div class="dp-val">$214</div></div>
+        <div class="dp-axis"><div></div><div class="dp-axisline"><span style="left:0%">$145</span><span style="left:33%">$175</span><span style="left:66%">$205</span><span style="left:100%">$220</span></div><div></div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="price-box">
+        <div class="price-top">
+          <div>
+            <div class="lab">List at</div>
+            <div class="big" data-editable="pricing.recommendedPrice" data-key="pricing.recommendedPrice"></div>
+            <div class="range">Range: <span data-editable="pricing.floor" data-key="pricing.floor"></span> floor &mdash; <span data-editable="pricing.ceiling" data-key="pricing.ceiling"></span> ceiling</div>
+          </div>
+          <div class="right">
+            <div class="lab" style="color:rgba(255,255,255,.6);">Price per square foot</div>
+            <div class="d" data-editable="pricing.pricePerSqft" data-key="pricing.pricePerSqft"></div>
+          </div>
+        </div>
+        <div class="price-body">
+          <ul class="rationale" id="rationale-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: NET SHEET -->
+    <div class="panel" id="tab-3">
+      <div class="sec-head"><h2>What you'll walk away with</h2><span class="sec-note">Estimate — update with your payoff</span></div>
+      <p class="lead">These figures are based on the recommended list price and typical Reunion closing costs. Enter your mortgage payoff below to see your estimated net proceeds.</p>
+      <div class="net-grid">
+        <div>
+          <div class="net-input-row">
+            <label>Mortgage payoff (enter yours)</label>
+            <input type="text" id="payoff-input" value="$450,000" oninput="updateNet(this.value)">
+          </div>
+          <table class="net-table">
+            <tbody>
+              <tr><td>Sale price (recommended)</td><td id="net-sale">$710,000</td></tr>
+              <tr><td>Commission (est. <span id="net-comm-pct">5.5</span>%)</td><td id="net-comm-val"></td></tr>
+              <tr><td>Seller closing costs (est. <span id="net-close-pct">1.3</span>%)</td><td id="net-close-val"></td></tr>
+              <tr><td>Buyer concessions (est. <span id="net-conc-pct">1.0</span>%)</td><td id="net-conc-val"></td></tr>
+              <tr><td>Mortgage payoff</td><td id="net-payoff-val"></td></tr>
+              <tr class="tot"><td>Estimated net to you</td><td id="net-total"></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="net-note" id="net-note-text"></div>
+      </div>
+      <div class="divider"></div>
+      <div class="sec-head"><h2>Price sensitivity</h2></div>
+      <p class="lead" style="margin-bottom:14px;">How list price changes move your estimated net (after commission, closing costs, concessions, and a $450,000 payoff).</p>
+      <table>
+        <thead><tr><th>List Price</th><th>$/sf</th><th>After Commission</th><th>After All Costs</th><th>Est. Net</th></tr></thead>
+        <tbody>
+          <tr><td>$685,000</td><td>$199</td><td>$647,325</td><td>$621,250</td><td>$171,250</td></tr>
+          <tr><td>$699,000</td><td>$203</td><td>$660,555</td><td>$634,270</td><td>$184,270</td></tr>
+          <tr class="highlight"><td><b>$710,000</b> <span class="tag match">Recommended</span></td><td>$206</td><td>$670,950</td><td>$644,620</td><td>$194,620</td></tr>
+          <tr><td>$724,900</td><td>$211</td><td>$685,030</td><td>$658,660</td><td>$208,660</td></tr>
+          <tr><td>$735,000</td><td>$214</td><td>$694,575</td><td>$668,105</td><td>$218,105</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TAB 4: GAME PLAN -->
+    <div class="panel" id="tab-4">
+      <div class="sec-head"><h2>How we get this sold</h2></div>
+      <p class="lead" data-editable="gamePlan.lead" data-key="gamePlan.lead"></p>
+      <div class="plays" id="gameplan-cards"></div>
+      <div class="divider"></div>
+      <div class="sec-head"><h2>Launch timeline</h2></div>
+      <div class="timeline" id="timeline-items"></div>
+    </div>
+
+    <!-- TAB 5: NOTES -->
+    <div class="panel" id="tab-5">
+      <div class="sec-head">
+        <h2>Notes &amp; Questions</h2>
+      </div>
+      <p class="notes-intro">A shared space for questions, updates, and anything that comes up as we move toward listing. All three of us can add notes — they save directly to the record.</p>
+      <div id="notes-list"></div>
+      <div class="add-note-box">
+        <textarea id="new-note-text" placeholder="Add a note or question…"></textarea>
+        <div class="add-note-footer">
+          <span id="note-author-label"></span>
+          <button class="btn btn-green" onclick="addNote()">Post Note</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-contact">
+      <a href="tel:6019272030">601-927-2030</a>
+      <a href="mailto:rich@getrichhq.com">rich@getrichhq.com</a>
+      <a href="https://getrichhq.com" target="_blank">getrichhq.com</a>
+    </div>
+    <div class="footer-disc">Figures are estimates for discussion only, not a guarantee of value or proceeds.</div>
+  </div>
+
+</div><!-- /shell -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────
+const REPO  = 'richprice220-svg/Public-assets';
+const PATH  = '299-lake-village-data.json';
+const RAW   = `https://cdn.jsdelivr.net/gh/${REPO}/${PATH}`;
+// GitHub token is set after login by the agent — entered via the save flow
+let GH_TOKEN = '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';
+
+// ─── USERS ────────────────────────────────────────────────────
+const USERS = {
+  'rich@getrichhq.com':       { password: 'Reunion2026!', name: 'Rich Price',   role: 'agent' },
+  'jasonthomas@email.com':    { password: 'LakeVillage1!', name: 'Jason Thomas', role: 'client' },
+  'ruththomas@email.com':     { password: 'LakeVillage1!', name: 'Ruth Thomas',  role: 'client' }
+};
+
+let currentUser = null;
+let appData = null;
+let editMode = false;
+let ghFileSha = null;
+
+// ─── LOGIN ────────────────────────────────────────────────────
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const pass  = document.getElementById('login-password').value;
+  const user  = USERS[email];
+  if (!user || user.password !== pass) {
+    document.getElementById('login-error').style.display = 'block';
+    return;
+  }
+  currentUser = { email, ...user };
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('edit-bar').style.display = 'flex';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('user-display').textContent = currentUser.name;
+  document.getElementById('note-author-label').textContent = 'Posting as: ' + currentUser.name;
+  loadData();
+}
+
+document.getElementById('login-password').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+function doLogout() {
+  currentUser = null;
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('edit-bar').style.display = 'none';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-password').value = '';
+  document.getElementById('login-error').style.display = 'none';
+  if (editMode) toggleEditMode();
+}
+
+// ─── DATA LOADING ─────────────────────────────────────────────
+async function loadData() {
+  showToast('Loading data…', '');
+  try {
+    // Use jsDelivr with cache-bust for freshest data
+    const res = await fetch(RAW + '?t=' + Date.now());
+    appData = await res.json();
+  } catch(e) {
+    // Fallback: try GitHub API directly if CDN is stale
+    try {
+      const apiRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`);
+      const meta = await apiRes.json();
+      ghFileSha = meta.sha;
+      appData = JSON.parse(atob(meta.content.replace(/\n/g, '')));
+    } catch(e2) {
+      showToast('Could not load data — using defaults', 'red');
+      return;
+    }
+  }
+  renderAll();
+  showToast('Loaded', 'green');
+}
+
+// ─── RENDER ───────────────────────────────────────────────────
+function renderAll() {
+  // Hero stats & simple editable fields
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const val = getNestedVal(appData, el.dataset.key);
+    if (val !== undefined) el.textContent = val;
+  });
+
+  // Overview cards
+  const oc = document.getElementById('overview-cards');
+  oc.innerHTML = appData.overview.cards.map((c, i) => `
+    <div class="play">
+      <div class="n" data-editable="overview.cards.${i}.label" data-key="overview.cards.${i}.label">${c.label}</div>
+      <h3 data-editable="overview.cards.${i}.title" data-key="overview.cards.${i}.title">${c.title}</h3>
+      <p data-editable="overview.cards.${i}.body" data-key="overview.cards.${i}.body">${c.body}</p>
+    </div>`).join('');
+
+  // Rationale bullets
+  const rl = document.getElementById('rationale-list');
+  rl.innerHTML = appData.pricing.rationale.map((r, i) => `
+    <li><span class="icn">→</span>
+      <div data-editable="pricing.rationale.${i}" data-key="pricing.rationale.${i}">${r}</div>
+    </li>`).join('');
+
+  // Game plan cards
+  const gp = document.getElementById('gameplan-cards');
+  gp.innerHTML = appData.gamePlan.cards.map((c, i) => `
+    <div class="play${c.lead ? ' lead-play' : ''}">
+      <div class="n" data-editable="gamePlan.cards.${i}.label" data-key="gamePlan.cards.${i}.label">${c.label}</div>
+      <h3 data-editable="gamePlan.cards.${i}.title" data-key="gamePlan.cards.${i}.title">${c.title}</h3>
+      <p data-editable="gamePlan.cards.${i}.body" data-key="gamePlan.cards.${i}.body">${c.body}</p>
+    </div>`).join('');
+
+  // Timeline
+  const tl = document.getElementById('timeline-items');
+  tl.innerHTML = appData.gamePlan.timeline.map((t, i) => `
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-week" data-editable="gamePlan.timeline.${i}.week" data-key="gamePlan.timeline.${i}.week">${t.week}</div>
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content">
+        <h4 data-editable="gamePlan.timeline.${i}.title" data-key="gamePlan.timeline.${i}.title">${t.title}</h4>
+        <p data-editable="gamePlan.timeline.${i}.body" data-key="gamePlan.timeline.${i}.body">${t.body}</p>
+      </div>
+    </div>`).join('');
+
+  // Net sheet
+  renderNetSheet();
+
+  // Notes
+  renderNotes();
+
+  // Re-apply edit mode attributes to newly rendered elements
+  if (editMode) applyEditMode(true);
+}
+
+// ─── NET SHEET ────────────────────────────────────────────────
+function renderNetSheet() {
+  const ns = appData.netSheet;
+  const payoffInput = document.getElementById('payoff-input');
+  payoffInput.value = '$' + ns.mortgagePayoff.toLocaleString();
+  document.getElementById('net-comm-pct').textContent = ns.commissionPct;
+  document.getElementById('net-close-pct').textContent = ns.closingCostPct;
+  document.getElementById('net-conc-pct').textContent = ns.concessionPct;
+  document.getElementById('net-note-text').innerHTML = '<b>How to read this:</b> ' + ns.note;
+  updateNet(payoffInput.value);
+}
+
+function parseDollars(s) { return parseFloat(String(s).replace(/[$,]/g, '')) || 0; }
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+function updateNet(payoffStr) {
+  if (!appData) return;
+  const ns = appData.netSheet;
+  const sale = ns.salePrice;
+  const payoff = parseDollars(payoffStr);
+  const comm = sale * (ns.commissionPct / 100);
+  const close = sale * (ns.closingCostPct / 100);
+  const conc = sale * (ns.concessionPct / 100);
+  const net = sale - comm - close - conc - payoff;
+  document.getElementById('net-sale').textContent = fmt(sale);
+  document.getElementById('net-comm-val').textContent = '−' + fmt(comm);
+  document.getElementById('net-close-val').textContent = '−' + fmt(close);
+  document.getElementById('net-conc-val').textContent = '−' + fmt(conc);
+  document.getElementById('net-payoff-val').textContent = '−' + fmt(payoff);
+  document.getElementById('net-total').textContent = '≈ ' + fmt(net);
+}
+
+// ─── NOTES ────────────────────────────────────────────────────
+function renderNotes() {
+  const list = document.getElementById('notes-list');
+  const notes = appData.notes || [];
+  if (notes.length === 0) {
+    list.innerHTML = '<div class="empty-notes">No notes yet — add one below.</div>';
+    return;
+  }
+  list.innerHTML = notes.map((n, i) => `
+    <div class="note-card">
+      <div class="note-meta">
+        <span class="note-author">${escHtml(n.author)}</span>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="note-date">${escHtml(n.date)}</span>
+          <button class="note-delete" title="Delete note" onclick="deleteNote(${i})">×</button>
+        </div>
+      </div>
+      <div class="note-body">${escHtml(n.body)}</div>
+    </div>`).join('');
+}
+
+function addNote() {
+  const txt = document.getElementById('new-note-text').value.trim();
+  if (!txt) return;
+  if (!appData.notes) appData.notes = [];
+  appData.notes.push({
+    author: currentUser.name,
+    date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }),
+    body: txt
+  });
+  document.getElementById('new-note-text').value = '';
+  renderNotes();
+  saveToGitHub();
+}
+
+function deleteNote(i) {
+  if (!confirm('Delete this note?')) return;
+  appData.notes.splice(i, 1);
+  renderNotes();
+  saveToGitHub();
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── EDIT MODE ────────────────────────────────────────────────
+function toggleEditMode() {
+  editMode = !editMode;
+  applyEditMode(editMode);
+  document.getElementById('edit-toggle-btn').textContent = editMode ? '✕ Done editing' : '✏️ Edit';
+  document.getElementById('save-btn').style.display = editMode ? 'inline-block' : 'none';
+  document.body.classList.toggle('edit-mode-on', editMode);
+  if (!editMode) document.getElementById('save-status').textContent = '';
+}
+
+function applyEditMode(on) {
+  document.querySelectorAll('[data-editable]').forEach(el => {
+    el.contentEditable = on ? 'true' : 'false';
+    if (on) {
+      el.addEventListener('input', onFieldEdit);
+    }
+  });
+}
+
+function onFieldEdit(e) {
+  const key = e.target.dataset.key;
+  const val = e.target.textContent;
+  setNestedVal(appData, key, val);
+  document.getElementById('save-status').textContent = '● Unsaved changes';
+}
+
+// ─── GITHUB SAVE ──────────────────────────────────────────────
+async function saveToGitHub() {
+  const saveBtn = document.getElementById('save-btn');
+  if (saveBtn) saveBtn.textContent = 'Saving…';
+  showToast('Saving to GitHub…', '');
+
+  try {
+    // Get current SHA
+    const metaRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+      headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    const meta = await metaRes.json();
+    ghFileSha = meta.sha;
+
+    // Update last-updated timestamp
+    appData.meta.lastUpdated = new Date().toISOString().slice(0, 10);
+
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(appData, null, 2))));
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${PATH}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${GH_TOKEN}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `Update: ${currentUser.name} — ${new Date().toLocaleString()}`,
+        content,
+        sha: ghFileSha
+      })
+    });
+
+    if (res.ok) {
+      showToast('Saved ✓', 'green');
+      document.getElementById('save-status').textContent = 'Saved ' + new Date().toLocaleTimeString();
+      if (saveBtn) saveBtn.textContent = 'Save Changes';
+    } else {
+      const err = await res.json();
+      throw new Error(err.message);
+    }
+  } catch(e) {
+    showToast('Save failed: ' + e.message, 'red');
+    if (saveBtn) saveBtn.textContent = 'Save Changes';
+  }
+}
+
+// ─── TABS ─────────────────────────────────────────────────────
+const tabs = document.querySelectorAll('.tab');
+const panels = document.querySelectorAll('.panel');
+function switchTab(i) {
+  tabs.forEach((t, idx) => t.classList.toggle('active', idx === i));
+  panels.forEach((p, idx) => p.classList.toggle('active', idx === i));
+}
+
+// ─── UTILS ────────────────────────────────────────────────────
+function getNestedVal(obj, path) {
+  return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj);
+}
+function setNestedVal(obj, path, val) {
+  const keys = path.split('.');
+  let o = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    const k = keys[i];
+    if (!isNaN(keys[i+1])) o[k] = o[k] || [];
+    else o[k] = o[k] || {};
+    o = o[k];
+  }
+  o[keys[keys.length - 1]] = val;
+}
+
+// ─── TOAST ────────────────────────────────────────────────────
+let toastTimer;
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' ' + type : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>

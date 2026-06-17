@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "address": "299 Lake Village Drive",
+    "subdivision": "Reunion",
+    "city": "Madison, MS 39110",
+    "beds": 5,
+    "baths": "3.5",
+    "sqft": 3442,
+    "yearBuilt": 2005,
+    "lot": "~0.40 ac",
+    "garage": "3-car",
+    "lastUpdated": "2026-06-17"
+  },
+  "hero": {
+    "listPrice": "$710,000",
+    "priceRange": "$710K–$725K",
+    "pricePerSqft": "$206/sf",
+    "targetLaunch": "Late June"
+  },
+  "overview": {
+    "lead": "Reunion is one of Madison's most established gated communities, and your home sits at a compelling intersection: five bedrooms, 3.5 baths, and over 3,400 square feet on Lake Village Drive — one of the main corridors with quick access to the beach, lake, and community amenities. The market data puts your home squarely in the $700,000–$725,000 range, and the timing is good. Properly priced and presented, Reunion homes at this level are selling in days, not months.",
+    "coreFinding": "Clean sold comps in your size and price tier are landing at $199–$214/sq ft. At 3,442 sq ft, that puts well-priced homes between $685,000–$736,000. Your recommended list price of $710,000 is well-supported by the data and positions you as the value play against competing active listings.",
+    "cards": [
+      {
+        "label": "DOM Pattern",
+        "title": "Right price = fast sale",
+        "body": "Well-priced, move-in ready homes in Reunion are selling in 1–9 days. The homes sitting 100+ days were all overpriced or had condition issues at launch. The market is direct about what it will and won't pay."
+      },
+      {
+        "label": "Competition",
+        "title": "One direct twin just hit the market",
+        "body": "135 Carrick Avenue is a 5/4.5, 3,400 sf home built in 2005 — listed one day ago at $725,000. Your home can be positioned as the value alternative, or priced at parity if condition supports it."
+      },
+      {
+        "label": "Concessions",
+        "title": "Budget 0.5%–1% for buyer asks",
+        "body": "Most clean Reunion sales include $1,000–$6,800 in seller concessions. We'll price to accommodate this without it hurting your net — plan for it now rather than be surprised at the table."
+      },
+      {
+        "label": "Timing",
+        "title": "Late June is a solid window",
+        "body": "Summer listings in Reunion benefit from buyers who are motivated to close before school starts. Launching the last week of June puts you in front of that wave before it peaks in July."
+      }
+    ]
+  },
+  "pricing": {
+    "recommendedPrice": "$710,000",
+    "pricePerSqft": "$206",
+    "floor": "high $680s",
+    "ceiling": "$724,900",
+    "rationale": [
+      "The comp cluster anchors here. Seven clean Reunion sales in your size range — excluding as-is and distressed — average $204/sq ft. At 3,442 sq ft, that puts you at $702,000. Your 5-bed count, 3.5 baths, and Lake Village address justify the slight premium to $710,000.",
+      "You're positioned as the value play. The direct comp — 135 Carrick Ave, same age, same size, same bedroom count — is listing at $725,000. Coming in at $710,000 means buyers comparing the two will see your home as the sharper deal, especially if you show better.",
+      "The stretch case for $724,900. If your kitchen and primary bath are updated, you have outdoor entertaining space, and the home shows in top condition, $724,900 is defensible. That's where 107 Vinca (5-day sale at $213/sf) and 125 Vinca ($212/sf) live. Condition has to earn it.",
+      "Avoid going above $735,000 without a clear differentiator. That's where the cautionary tales start. 101 Lake Village sat for 363 days before finding its buyer at $727,000 — and that was a 2014 build. Overpricing in this market is punished quickly and visibly."
+    ]
+  },
+  "netSheet": {
+    "salePrice": 710000,
+    "commissionPct": 5.5,
+    "closingCostPct": 1.3,
+    "concessionPct": 1.0,
+    "mortgagePayoff": 450000,
+    "note": "The net sheet subtracts all costs from your sale price. Commission and closing costs are estimates — your final closing disclosure will show exact figures. Concessions vary by offer; budgeting 1% gives you room to negotiate without it being a surprise. The mortgage payoff is what you owe your lender as of closing day — call your servicer for a payoff statement once you have a contract."
+  },
+  "gamePlan": {
+    "lead": "A well-priced Reunion home in good condition doesn't need tricks — it needs execution. Here's the plan from where we are today through a contract.",
+    "cards": [
+      {
+        "label": "The strategy",
+        "title": "Price to compete, launch to win",
+        "body": "At $710,000, you're positioned as the sharper deal against 135 Carrick at $725,000. Buyers shopping Reunion in this size range will see both — your job is to show better and be priced right when they do. That combination, sharp price plus strong presentation, is what the 2-day and 5-day sales in this comp set had in common. We're aiming to be in that group, not the 100+ day group.",
+        "lead": true
+      },
+      {
+        "label": "Photography",
+        "title": "Hero shots that lead with size and lifestyle",
+        "body": "Five-bedroom Reunion homes sell on lifestyle first — golf, lake, trails, privacy. The photography should lead with the spaces buyers remember: the kitchen, the primary suite, outdoor entertaining area, and the lot. Twilight exterior if the curb appeal supports it.",
+        "lead": false
+      },
+      {
+        "label": "Listing copy",
+        "title": "Lake Village address is the hook",
+        "body": "Proximity to the beach, lake, and community pool is a real differentiator on your street. The copy should open with lifestyle and location, then confirm size and features. Buyers decide on emotion and justify with data — give them both.",
+        "lead": false
+      },
+      {
+        "label": "Pre-listing",
+        "title": "Condition items before we go live",
+        "body": "A fresh-launch price only works once. Any deferred maintenance, paint touch-ups, or punch-list items should be handled before the listing goes active — not disclosed as \"buyer to verify\" on something a buyer's agent will flag immediately.",
+        "lead": false
+      },
+      {
+        "label": "Week 1 target",
+        "title": "Showings in the first 48 hours",
+        "body": "Launch-day blast to buyer's agents working the Reunion corridor. Showing requests in the first two days tell us whether the price is right. If week one is active but no offers, we have data. If it's quiet, we make a move before it goes stale.",
+        "lead": false
+      },
+      {
+        "label": "If it sits",
+        "title": "Defined adjustment trigger",
+        "body": "If we have strong showings but no offer by day 10, we have a conversation. If showings are light, the price needs to move — fast. Waiting three weeks to make a small cut is worse than making the right move in week two. We'll agree on the trigger before we launch.",
+        "lead": false
+      }
+    ],
+    "timeline": [
+      { "week": "Now", "title": "Walk-through & feature list", "body": "Confirm updates, finishes, and any condition items. Lock in the final price based on what you see — $710k baseline, potentially $724,900 if condition supports it." },
+      { "week": "Wk 1", "title": "Photography & listing prep", "body": "Professional photos scheduled. Disclosures completed. Pre-listing checklist addressed. Listing copy drafted and approved." },
+      { "week": "Wk 2", "title": "Go live — late June", "body": "Listing goes active on MLS. Launch-day push to buyer's agents. Property hits new-listing alerts for every buyer shopping Reunion in this price range. Showings begin." },
+      { "week": "Wk 3", "title": "First-week review", "body": "Check showing volume and feedback. If we have the right price and presentation, this is where offers come. If not, we adjust quickly — not slowly." },
+      { "week": "Target", "title": "Under contract", "body": "Target close before back-to-school season. Most Reunion buyers at this price point want to be settled by early August — that gives us a natural deadline to work with." }
+    ]
+  },
+  "notes": []
+}
